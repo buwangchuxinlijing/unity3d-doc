@@ -13,6 +13,6 @@
 
 4. 操作截图
 
-   ​	![](./images/gameobject-draw-mode-tiled.png)![](./images/sprite-mesh-type-full-rect.png)
+   ​	![](./images/gameobject-draw-mode-tiled.png)  ![](./images/sprite-mesh-type-full-rect.png)
 
    
