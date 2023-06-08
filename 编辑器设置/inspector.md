@@ -15,4 +15,104 @@
 
    ​	![](./images/gameobject-draw-mode-tiled.png)![](./images/sprite-mesh-type-full-rect.png)
 
-   
+
+
+
+
+### 裁剪精灵
+
+ 1. 选择你要裁剪的精灵，修改`Sprite Mode`为`Multiple`,点击`Sprite Editor`,在跳出的编辑器内选择`slice`并根据type选择你要切割的方式和类型和具体的参数，使你的切割较为完整美观。
+
+    ![](./images/sprite-editor-slice.png)
+
+### 瓦片地图
+
+ 1. 创建瓦片地图
+
+    * 右键 -> 2D Object -> Tilemap
+
+      ![](./images/tile-map.png)
+
+ 2. 创建Tile Palette。
+
+    * 打开Tile 调色面板。Window -> 2D -> Tile Palette
+
+      ![](./images/tile-palette.png)
+
+    *  创建Palette
+
+      下拉新建一个调色板，并将活动的瓦片地图选择创建的Tilemap名称。
+
+      ![](./images/create-new-palette.png)
+
+ 3. 将你的瓦片精灵拖拽到你的tile palette中，这个时候会根据你的精灵创建Tile，点击保存即可。最终效果如下。
+
+    ![](./images/final-tile-palette.png)
+
+    现在你就可以用这些瓦片绘制你的地图了。
+
+​		
+
+### 碰撞设置
+
+ 1. 瓦片地图碰撞
+    选中Tilemap，为它添加三个组件（`Tilemap Collider 2D`,`Rigidbody 2D`，`Composite Collider 2D`）
+
+    *  激活Tilemap Collider 2D组件的`Used By Composite`，将小碰撞体复合成一个大碰撞体，并添加`Composite Collider 2D`组件
+    *  修改物理系统组件设置Body Type为`static`。 Static 将阻止你的世界移动。此外还有助于物理系统优化计算，因为它现在知道刚体不能移动
+
+    ![](./images/tilemap-collider.png)
+
+2. 游戏对象碰撞
+   ​		选中你的游戏对象，添加`Rigidbody 2D`、`Box Collider 2D`。修改物理系统重力为0，如果你的游戏对象这个时候会旋转，那么请将`Freeze Rotation `的Z轴勾选上，这意味着你冻结了z轴的旋转。修改盒碰撞组件，点击Edit Collider,修改碰撞体积大小。
+
+   ​		![](./images/gameobject-collider.png)
+
+
+
+### 动画制作
+
+ 1. 创建动画
+
+    * 选中你需要添加动画的游戏对象，然后点击window->Animation->Animation
+
+      ![](./images/create-animation.png)
+
+    * 创建新的动画，从Project视图中将你需要的动画全部拖到动画框内，并调节合适的Samples值，使动画更加合理。（Samples的值代表1秒内播放多少帧）
+
+      <img src="./images/create-animation-01.png" style="zoom: 67%;" /><img src="./images/create-animation-02.png" style="zoom: 50%;" />
+
+      
+
+    * 左右的动画通常是镜像添加属性 Sprite Renderer  -> Flip X,然后在第0帧和最后一帧上将翻转勾选上。
+
+      ![](./images/reversal-animation.png)
+
+      ![](./images/reversal-animation-setting.png)
+
+      
+
+ 2. 制作动画混合树
+
+    * 打开Animator，window->animation->animator   删除已有的动画状态机，创建混合树。![](./images/create-animator.png)
+
+    * 修改混合类型为2D，添加动画参数X Y。
+
+      ![](./images/create-animator-01.png)
+
+    * 点击Motion的 `+` 添加动画，并添加方向值。（Pos X 、 Pos Y）
+
+      ![](./images/create-animator-02.png)
+
+      ![](./images/create-animator-03.png)
+
+ 3. 连接动画树
+
+    * 创建连接线 ，在你需要连接的起点：右键 ->Make Transition
+
+      ![](./images/create-animator-link-01.png)
+
+    * 设置连接线属性，设置触发条件。这里因为是移动的动画和站立静止的动画切换，所以使用了一个触发条件`speed<0.1`时由Walk切换成Idle （这里速度的设置是使用脚本的移动向量长度），并且不存在退出时间`Has Exit Time`，这意味着不需要等待当前动画完成才切换而是达到条件立马切换。
+
+      ![](./images/create-animator-link-02.png)
+
