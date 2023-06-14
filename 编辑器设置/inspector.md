@@ -117,3 +117,24 @@
 
       ![](./images/create-animator-link-02.png)
 
+
+
+### 相机跟随
+
+​	有时候我们要动态相机就像电影一样永远是在主角身上相机，所以我们就需要cinemachine。
+
+ 1. 添加`Cinemachine`相机
+
+    安装相机：windows > package manager > Cinemachine
+
+ 2. 创建`Cinemachine`相机设置跟随主角
+
+    * 创建电影机：层级视图->右键->cinnemachine->2D Camera
+
+      ![](./images/create-cinemachine.png)
+
+    * inspector设置，`Follow`表示跟随的游戏对象，直接从左侧层级拖动过来即可，Ortho Size是指在摄像机的一半高度内可容纳多少个单位，因为这就是摄像机的工作方式。由于我们将该属性设置为 **3**，所以可以在屏幕的垂直方向上看到 6个世界单位。
+
+      ![](./images/cinemachine-inspector.png)
+
+ 3. 限定相机大小
